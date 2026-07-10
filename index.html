@@ -258,7 +258,7 @@ function logout() {
 
 function go(dest) {
   const PA = 'https://deimantesp.github.io/pardavimu-analize/';
-  if (dest === 'gamyba')    { window.open('https://deimantesp.github.io/gamybos-lenta/', '_blank'); }
+  if (dest === 'gamyba')    { localStorage.setItem('pa_auto_open', 'gamyba'); window.open(PA, '_blank'); }
   else if (dest === 'pardavimai') { window.open(PA, '_blank'); }
   else if (dest === 'klientai')   { window.open('https://deimantesp.github.io/crm/', '_blank'); }
   else if (dest === 'lenktynes')  { window.open('https://deimantesp.github.io/gamybos-lenta/', '_blank'); }
