@@ -128,11 +128,11 @@ body {
 
 .hub-tiles {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-bottom: 1rem;
 }
-@media (max-width: 600px) { .hub-tiles { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .hub-tiles { grid-template-columns: 1fr; } }
 
 .hub-tile {
   display: flex;
@@ -220,6 +220,11 @@ body {
       <div class="hub-tile-name">Klientai</div>
       <div class="hub-tile-desc">CRM — kontaktai, sektoriai, ryšių istorija</div>
     </div>
+    <div class="hub-tile" onclick="go('lenktynes')">
+      <div class="hub-tile-icon">📺</div>
+      <div class="hub-tile-name">Pamainos lenktynės</div>
+      <div class="hub-tile-desc">Gamybos lenktynių lenta, TV ekranas</div>
+    </div>
   </div>
 </div>
 
@@ -253,9 +258,10 @@ function logout() {
 
 function go(dest) {
   const PA = 'https://deimantesp.github.io/pardavimu-analize/';
-  if (dest === 'gamyba') { localStorage.setItem('pa_auto_open', 'gamyba'); window.open(PA, '_blank'); }
+  if (dest === 'gamyba')    { localStorage.setItem('pa_auto_open', 'gamyba'); window.open(PA, '_blank'); }
   else if (dest === 'pardavimai') { window.open(PA, '_blank'); }
-  else if (dest === 'klientai') { window.open('https://deimantesp.github.io/crm/', '_blank'); }
+  else if (dest === 'klientai')   { window.open('https://deimantesp.github.io/crm/', '_blank'); }
+  else if (dest === 'lenktynes')  { window.open('https://deimantesp.github.io/gamybos-lenta/', '_blank'); }
 }
 
 if (localStorage.getItem('hub_auth') === '1') showDashboard();
