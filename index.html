@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perliprof · Soltera</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0A2342">
+<meta name="theme-color" content="#0d1f13">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,7 +18,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Montserrat', sans-serif;
-  background: #0A2342;
+  background: #0d1f13;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,9 +37,10 @@ body {
   max-width: 360px;
 }
 .gate-logo {
-  width: 80px;
-  filter: brightness(0) invert(1);
-  opacity: 0.92;
+  width: 130px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 14px;
 }
 .gate-title {
   color: #fff;
@@ -80,15 +81,15 @@ body {
   padding: 14px;
   border-radius: 10px;
   border: none;
-  background: #fff;
-  color: #0A2342;
+  background: #3a7d2c;
+  color: #fff;
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: background 0.15s;
 }
-.gate-btn:hover { opacity: 0.9; }
+.gate-btn:hover { background: #2e6423; }
 .gate-err {
   color: #ff6b6b;
   font-size: 13px;
@@ -108,7 +109,7 @@ body {
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
-.hub-logo { width: 52px; filter: brightness(0) invert(1); opacity: 0.9; }
+.hub-logo { width: 64px; background: #fff; border-radius: 12px; padding: 6px; }
 .hub-title { color: #fff; font-size: 20px; font-weight: 800; line-height: 1.2; }
 .hub-title span { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 2px; }
 .hub-logout {
