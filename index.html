@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perliprof · Soltera</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0A2342">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Perliprof">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #0A2342;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* ── Slaptažodžio ekranas ── */
+#gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 360px;
+}
+.gate-logo {
+  width: 80px;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+.gate-title {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.3;
+}
+.gate-sub {
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: -0.75rem;
+  text-align: center;
+}
+.gate-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 3px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.gate-input::placeholder { letter-spacing: 1px; color: rgba(255,255,255,0.35); font-weight: 400; }
+.gate-input:focus { border-color: rgba(255,255,255,0.5); }
+.gate-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #fff;
+  color: #0A2342;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.gate-btn:hover { opacity: 0.9; }
+.gate-err {
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 18px;
+  text-align: center;
+}
+
+/* ── Pagrindinis ekranas ── */
+#dashboard { display: none; width: 100%; max-width: 640px; }
+
+.hub-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.hub-logo { width: 52px; filter: brightness(0) invert(1); opacity: 0.9; }
+.hub-title { color: #fff; font-size: 20px; font-weight: 800; line-height: 1.2; }
+.hub-title span { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 2px; }
+.hub-logout {
+  margin-left: auto;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.hub-logout:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+.hub-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) { .hub-tiles { grid-template-columns: 1fr; } }
+
+.hub-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1.6rem 1.4rem;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+}
+.hub-tile:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.28);
+  transform: translateY(-2px);
+}
+.hub-tile-icon { font-size: 34px; line-height: 1; }
+.hub-tile-name { color: #fff; font-size: 17px; font-weight: 800; }
+.hub-tile-desc { color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 500; line-height: 1.4; }
+
+.hub-extra {
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hub-extra-label { color: rgba(255,255,255,0.35); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+.hub-extra a {
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: color 0.15s, border-color 0.15s;
+}
+.hub-extra a:hover { color: #fff; border-color: rgba(255,255,255,0.35); }
+</style>
+</head>
+<body>
+
+<!-- Slaptažodžio ekranas -->
+<div id="gate">
+  <img src="logo.png" class="gate-logo" alt="Perliprof">
+  <div>
+    <div class="gate-title">Perliprof · Soltera</div>
+    <div class="gate-sub">Verslo sistema</div>
+  </div>
+  <input class="gate-input" id="gate-pass" type="password" placeholder="Slaptažodis"
+    onkeydown="if(event.key==='Enter')tryLogin()">
+  <button class="gate-btn" onclick="tryLogin()">Prisijungti</button>
+  <div class="gate-err" id="gate-err"></div>
+</div>
+
+<!-- Pagrindinis ekranas (po prisijungimo) -->
+<div id="dashboard">
+  <div class="hub-header">
+    <img src="logo.png" class="hub-logo" alt="Perliprof">
+    <div class="hub-title">
+      Perliprof · Soltera
+      <span>Verslo sistema</span>
+    </div>
+    <button class="hub-logout" onclick="logout()">Atsijungti</button>
+  </div>
+
+  <div class="hub-tiles">
+    <a class="hub-tile" href="https://deimantesp.github.io/pardavimu-analize/" target="_blank">
+      <div class="hub-tile-icon">🏭</div>
+      <div class="hub-tile-name">Gamyba</div>
+      <div class="hub-tile-desc">Užsakymai, gamybos analizė, savaitės planas</div>
+    </a>
+    <a class="hub-tile" href="https://deimantesp.github.io/crm/" target="_blank">
+      <div class="hub-tile-icon">👥</div>
+      <div class="hub-tile-name">Klientai</div>
+      <div class="hub-tile-desc">CRM — kontaktai, sektoriai, ryšių istorija</div>
+    </a>
+  </div>
+
+  <div class="hub-extra">
+    <span class="hub-extra-label">Gamykla</span>
+    <a href="https://deimantesp.github.io/gamybos-lenta/" target="_blank">📺 Pamainos lenktynės</a>
+  </div>
+</div>
+
+<script>
+const HUB_PASS = '5DWok9BO6MHvY1';
+
+function tryLogin() {
+  const v = document.getElementById('gate-pass').value;
+  if (v === HUB_PASS) {
+    localStorage.setItem('hub_auth', '1');
+    showDashboard();
+  } else {
+    document.getElementById('gate-err').textContent = 'Neteisingas slaptažodis';
+    document.getElementById('gate-pass').value = '';
+    document.getElementById('gate-pass').focus();
+  }
+}
+
+function showDashboard() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('dashboard').style.display = '';
+}
+
+function logout() {
+  localStorage.removeItem('hub_auth');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('gate').style.display = 'flex';
+  document.getElementById('gate-pass').value = '';
+  document.getElementById('gate-err').textContent = '';
+}
+
+if (localStorage.getItem('hub_auth') === '1') showDashboard();
+</script>
+</body>
+</html>
