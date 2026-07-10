@@ -37,10 +37,10 @@ body {
   max-width: 360px;
 }
 .gate-logo {
-  width: 130px;
+  width: 170px;
   background: #fff;
-  border-radius: 20px;
-  padding: 14px;
+  border-radius: 24px;
+  padding: 16px;
 }
 .gate-title {
   color: #fff;
@@ -128,11 +128,11 @@ body {
 
 .hub-tiles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   margin-bottom: 1rem;
 }
-@media (max-width: 480px) { .hub-tiles { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .hub-tiles { grid-template-columns: 1fr; } }
 
 .hub-tile {
   display: flex;
@@ -206,20 +206,20 @@ body {
 
   <div class="hub-tiles">
     <a class="hub-tile" href="https://deimantesp.github.io/pardavimu-analize/" target="_blank">
+      <div class="hub-tile-icon">📊</div>
+      <div class="hub-tile-name">Pardavimų analizė</div>
+      <div class="hub-tile-desc">Užsakymai, savaitės planas, krovinių kalendorius</div>
+    </a>
+    <a class="hub-tile" href="https://deimantesp.github.io/gamybos-lenta/" target="_blank">
       <div class="hub-tile-icon">🏭</div>
       <div class="hub-tile-name">Gamyba</div>
-      <div class="hub-tile-desc">Užsakymai, gamybos analizė, savaitės planas</div>
+      <div class="hub-tile-desc">Gamybos analizė, pamainos, metinis vaizdas</div>
     </a>
     <a class="hub-tile" href="https://deimantesp.github.io/crm/" target="_blank">
       <div class="hub-tile-icon">👥</div>
       <div class="hub-tile-name">Klientai</div>
       <div class="hub-tile-desc">CRM — kontaktai, sektoriai, ryšių istorija</div>
     </a>
-  </div>
-
-  <div class="hub-extra">
-    <span class="hub-extra-label">Gamykla</span>
-    <a href="https://deimantesp.github.io/gamybos-lenta/" target="_blank">📺 Pamainos lenktynės</a>
   </div>
 </div>
 
