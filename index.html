@@ -205,21 +205,21 @@ body {
   </div>
 
   <div class="hub-tiles">
-    <a class="hub-tile" href="https://deimantesp.github.io/pardavimu-analize/" target="_blank">
+    <div class="hub-tile" onclick="go('pardavimai')">
       <div class="hub-tile-icon">📊</div>
       <div class="hub-tile-name">Pardavimų analizė</div>
       <div class="hub-tile-desc">Užsakymai, savaitės planas, krovinių kalendorius</div>
-    </a>
-    <a class="hub-tile" href="https://deimantesp.github.io/pardavimu-analize/#gamyba" target="_blank">
+    </div>
+    <div class="hub-tile" onclick="go('gamyba')">
       <div class="hub-tile-icon">🏭</div>
       <div class="hub-tile-name">Gamyba</div>
       <div class="hub-tile-desc">Gamybos analizė, pamainos, metinis vaizdas</div>
-    </a>
-    <a class="hub-tile" href="https://deimantesp.github.io/crm/" target="_blank">
+    </div>
+    <div class="hub-tile" onclick="go('klientai')">
       <div class="hub-tile-icon">👥</div>
       <div class="hub-tile-name">Klientai</div>
       <div class="hub-tile-desc">CRM — kontaktai, sektoriai, ryšių istorija</div>
-    </a>
+    </div>
   </div>
 </div>
 
@@ -249,6 +249,13 @@ function logout() {
   document.getElementById('gate').style.display = 'flex';
   document.getElementById('gate-pass').value = '';
   document.getElementById('gate-err').textContent = '';
+}
+
+function go(dest) {
+  const PA = 'https://deimantesp.github.io/pardavimu-analize/';
+  if (dest === 'gamyba') { localStorage.setItem('pa_auto_open', 'gamyba'); window.open(PA, '_blank'); }
+  else if (dest === 'pardavimai') { window.open(PA, '_blank'); }
+  else if (dest === 'klientai') { window.open('https://deimantesp.github.io/crm/', '_blank'); }
 }
 
 if (localStorage.getItem('hub_auth') === '1') showDashboard();
